@@ -36,7 +36,7 @@ inputUpper = inputRaw.toUpperCase();
 if (inputUpper === "ROCK" || inputUpper === "PAPER" || inputUpper === "SCISSORS"){
     playerSelection = inputUpper;
 } else {
-    console.log("Reload, go again");
+    console.log("Invalid input, skip turn.");
 }
     return playerSelection;
 }
@@ -118,7 +118,7 @@ if (cpu === "ROCK" && human === "PAPER"){
 
 } else if (cpu === "SCISSORS" && human === "PAPER"){
     console.log("Paper loses to Scissors, you lose :(");
-    return ++winLoss;
+    return --winLoss;
 } 
 
 }
