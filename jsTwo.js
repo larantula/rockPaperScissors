@@ -6,6 +6,9 @@ let outcomeArray = new Array();
 
 
 
+
+
+
 //human selects rock/paper/scissors
 function humanPlay(){
 
@@ -104,7 +107,7 @@ function playGame(cpu, human){
     
     }
 
-    function playHtml(human){
+ function playHtml(human){
 
     //let comp decide on rock/paper/scissors
     computerPlay();
@@ -116,6 +119,7 @@ function playGame(cpu, human){
         //outcome = "You tie!";
         outcomeArray.push("You Tie!");
         console.log("Score: "+winLoss);
+        
 
     } else {
 
@@ -130,53 +134,153 @@ function playGame(cpu, human){
     } 
 
 
-        //function to call the for loop
-        function playGame5Times(){
-            
-            
+//function to call the for loop
+function playGame5Times(){
+    
+    
+
+    for (let i = 0; i < 5; i++){
+
+
+
+        //get human input
+        humanPlay();
+        //let comp decide on rock/paper/scissors
+        computerPlay();
+    
+        //adjust computerSelection
+        computerSelection = computerPlay();
+    
         
-            for (let i = 0; i < 5; i++){
+    
+        //check for tie
+        if (computerSelection === playerSelection){
+            console.log("You tie!");
+            //outcome = "You tie!";
+            outcomeArray.push("You Tie!");
+            console.log("Score: "+winLoss);
+    
+        } else {
+    
+        // if no tie, play game once in loop
+    
+        playGame(computerSelection,playerSelection);
+
+        //display total win/loss
+        console.log("Score: "+winLoss);  
         
-        
-        
-                //get human input
-                humanPlay();
-                //let comp decide on rock/paper/scissors
-                computerPlay();
-            
-                //adjust computerSelection
-                computerSelection = computerPlay();
-            
-                
-            
-                //check for tie
-                if (computerSelection === playerSelection){
-                    console.log("You tie!");
-                    //outcome = "You tie!";
-                    outcomeArray.push("You Tie!");
-                    console.log("Score: "+winLoss);
-         
-                } else {
-            
-                // if no tie, play game once in loop
-            
-                playGame(computerSelection,playerSelection);
-        
-                //display total win/loss
-                console.log("Score: "+winLoss);  
-                
 
-            }
-            }
+    }
+    }
 
 
 
 
 
 
-        }
+}
 
         //play game 5 times
         //document.getElementById("game").innerHTML = playGame5Times();
-        
+
+
+const rock = document.querySelector(".ROCK");
+const paper = document.querySelector(".PAPER");
+const scissors = document.querySelector(".SCISSORS");
+const newGame = document.querySelector(".newGame");
+
+let count = 0;
+let round = 0;
+
+
+
+const container = document.querySelector("#container");
+
+const score = document.createElement("div");
+score.classList.add("score");
+score.textContent = "Score: "+ winLoss;
+container.appendChild(score);
+
+
+
+const totalRound = document.createElement("div")
+    totalRound.classList.add("totalRound");
+    totalRound.textContent = "Round: "+round;
+container.appendChild(totalRound);
+
+
+const textResult = document.createElement("div");
+    textResult.classList.add("textResult");
+    textResult.textContent = "Round Outcome: Press a button to start playing!";
+container.appendChild(textResult);
+
+const firstToFive = document.createElement("div");
+    firstToFive.classList.add("firstToFive");
+    firstToFive.textContent = "First to 5 points wins!";
+container.appendChild(firstToFive);
+
+rock.addEventListener(`click`, e => {
+    playHtml("ROCK");
+    round++;
+    totalRound.innerHTML = "Round: "+round;
+    score.innerHTML = "Score: "+winLoss;
+    textResult.innerHTML = "Round Outcome: "+outcomeArray[round-1];
+    
+    if (winLoss == 5){
+        firstToFive.innerHTML = "You win! Ur a cool guy backflip mctwist! Play again to prove "+
+        "you're the forever-guyman";
+    } else if (winLoss == -5){
+        firstToFive.innerHTML = "You lose, smelly loserpants. Refresh page and try to be "+
+        "less of a suckstick."
+    }
+})
+
+scissors.addEventListener(`click`, e => {
+    playHtml("SCISSORS")
+    round++;
+    totalRound.innerHTML = "Round: "+round;
+    score.innerHTML = "Score: "+winLoss;
+    textResult.innerHTML = "Round Outcome: "+outcomeArray[round-1];
+
+    if (winLoss == 5){
+        firstToFive.innerHTML = "You win! Ur a cool guy backflip mctwist! Play again to prove "+
+        "you're the forever-guyman";
+    } else if (winLoss == -5){
+        firstToFive.innerHTML = "You lose, smelly loserpants. Refresh page and try to be "+
+        "less of a suckstick."
+    }
+
+})
+
+paper.addEventListener(`click`, e =>{
+    playHtml("PAPER");
+    round++;
+    totalRound.innerHTML = "Round: "+round;
+    score.innerHTML = "Score: "+winLoss;
+    textResult.innerHTML = "Round Outcome: "+outcomeArray[round-1];
+
+    if (winLoss == 5){
+        firstToFive.innerHTML = "You win! Ur a cool guy backflip mctwist! Play again to prove "+
+        "you're the forever-guyman";
+    } else if (winLoss == -5){
+        firstToFive.innerHTML = "You lose, smelly loserpants. Refresh page and try to be "+
+        "less of a suckstick."
+    }
+
+})
+
+newGame.addEventListener(`click`, (e) => {
+
+    round = 0;
+    winLoss = 0;
+    totalRound.innerHTML = "Round: "+round;
+    score.innerHTML = "Score: " + winLoss;
+    textResult.textResult = "Press a button to start playing!"
+;
+    firstToFive.innerHTML = "First to 5 points wins!";
+})
+
+
+
+
 
