@@ -104,6 +104,32 @@ function playGame(cpu, human){
     
     }
 
+    function playHtml(human){
+
+    //let comp decide on rock/paper/scissors
+    computerPlay();
+    computerSelection = computerPlay();    
+
+    //check for tie
+    if (computerSelection === human){
+        console.log("You tie!");
+        //outcome = "You tie!";
+        outcomeArray.push("You Tie!");
+        console.log("Score: "+winLoss);
+
+    } else {
+
+    // if no tie, play game once in loop
+
+    playGame(computerSelection,human);
+
+    //display total win/loss
+    console.log("Score: "+winLoss);  
+
+    }
+    } 
+
+
         //function to call the for loop
         function playGame5Times(){
             
@@ -142,9 +168,15 @@ function playGame(cpu, human){
 
             }
             }
+
+
+
+
+
+
         }
 
         //play game 5 times
-        document.getElementById("game").innerHTML = playGame5Times();
+        //document.getElementById("game").innerHTML = playGame5Times();
         
 
